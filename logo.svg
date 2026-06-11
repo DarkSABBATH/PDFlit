@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 32" fill="none">
+  <!-- Icon: document with spark -->
+  <rect x="2" y="2" width="22" height="28" rx="4" fill="#1c1d20" stroke="#2a2b2f" stroke-width="1.5"/>
+  <rect x="6" y="8" width="14" height="2" rx="1" fill="#6c8fff" opacity="0.9"/>
+  <rect x="6" y="13" width="10" height="2" rx="1" fill="#6c8fff" opacity="0.5"/>
+  <rect x="6" y="18" width="12" height="2" rx="1" fill="#6c8fff" opacity="0.5"/>
+  <!-- Spark / lightning -->
+  <path d="M17 22 L14 27 L16.5 27 L14 32 L20 25 L17.5 25 L20 22 Z" fill="#6c8fff" opacity="0.85"/>
+  <!-- Wordmark -->
+  <text x="32" y="22" font-family="Sora, Inter, sans-serif" font-size="16" font-weight="700" fill="#e8e9ec" letter-spacing="-0.3">PDF<tspan fill="#6c8fff">lit</tspan></text>
+</svg>

@@ -7,6 +7,23 @@
   <meta name="description" content="Free, instant document to Markdown converter. Convert PDF, Word (.docx), HTML, and TXT files to clean Markdown — no upload, no signup, 100% private." />
   <meta name="keywords" content="pdf to markdown, docx to markdown, word to markdown, html to markdown, free converter, pdflit" />
 
+  <!-- Canonical -->
+  <link rel="canonical" href="https://pd-flit.vercel.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="PDFlit — Free Document to Markdown Converter" />
+  <meta property="og:description" content="Convert PDF, Word, HTML and TXT to clean Markdown. Free, instant, runs in your browser. No uploads, no signup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pd-flit.vercel.app/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PDFlit — Free Document to Markdown Converter" />
+  <meta name="twitter:description" content="Convert PDF, Word, HTML and TXT to clean Markdown. Free, instant, runs in your browser." />
+
+  <!-- Favicon (inline SVG as data URI) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='1' width='20' height='26' rx='4' fill='%231c1d20' stroke='%232a2b2f' stroke-width='1.5'/%3E%3Crect x='6' y='7' width='12' height='2' rx='1' fill='%236c8fff'/%3E%3Crect x='6' y='12' width='8' height='2' rx='1' fill='%236c8fff' opacity='.5'/%3E%3Crect x='6' y='17' width='10' height='2' rx='1' fill='%236c8fff' opacity='.5'/%3E%3Cpath d='M15 20 L12 26 L14.5 26 L12 32 L19 24 L16.5 24 L19 20Z' fill='%236c8fff'/%3E%3C/svg%3E" />
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -706,7 +723,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#"><span>PDF</span><span class="dot">lit</span></a>
+  <a class="nav-logo" href="#" aria-label="PDFlit home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="26" height="26" fill="none" style="flex-shrink:0"><rect x="2" y="1" width="20" height="26" rx="4" fill="#1c1d20" stroke="#2a2b2f" stroke-width="1.5"/><rect x="6" y="7" width="12" height="2" rx="1" fill="#6c8fff"/><rect x="6" y="12" width="8" height="2" rx="1" fill="#6c8fff" opacity=".5"/><rect x="6" y="17" width="10" height="2" rx="1" fill="#6c8fff" opacity=".5"/><path d="M15 20 L12 26 L14.5 26 L12 32 L19 24 L16.5 24 L19 20Z" fill="#6c8fff"/></svg><span>PDF<span class="dot">lit</span></span></a>
   <div class="nav-links">
     <a href="#how-it-works">How it works</a>
     <a href="#faq">FAQ</a>
@@ -731,7 +748,9 @@
 
 <!-- AD LEADERBOARD -->
 <div class="main-wrap">
-  <div class="ad-slot ad-leaderboard"><!-- AdSense: leaderboard 728×90 --></div>
+  <!-- AdSense leaderboard: uncomment when approved
+  <div class="ad-slot ad-leaderboard"></div>
+  -->
 
   <!-- CONVERTER -->
   <div class="converter-card" id="converter">
@@ -770,7 +789,7 @@
       </button>
       <button class="btn" onclick="clearQueue()">✕ Clear</button>
       <div class="actions-right">
-        <button class="btn btn-sm" id="downloadZipBtn" onclick="downloadZip()" disabled>
+        <button class="btn btn-sm" id="downloadZipBtn" onclick="downloadZip()" style="display:none">
           ⬇ Download all (.zip)
         </button>
       </div>
@@ -784,7 +803,9 @@
   </div>
 
   <!-- MID AD -->
-  <div class="ad-slot ad-mid"><!-- AdSense: banner 728×90 --></div>
+  <!-- AdSense mid banner: uncomment when approved
+  <div class="ad-slot ad-mid"></div>
+  -->
 
   <!-- HISTORY -->
   <div class="history-section" id="historySection">
@@ -986,7 +1007,8 @@ async function convertAll() {
   const doneCount = Object.keys(results).length;
   if (doneCount > 0) {
     document.getElementById('resultsSection').style.display = 'block';
-    document.getElementById('downloadZipBtn').disabled = false;
+    const zipBtn = document.getElementById('downloadZipBtn');
+    if (doneCount > 1) { zipBtn.style.display = 'inline-flex'; } else { zipBtn.style.display = 'none'; }
     showToast(`${doneCount} file${doneCount > 1 ? 's' : ''} converted`, 'success');
   }
 }
