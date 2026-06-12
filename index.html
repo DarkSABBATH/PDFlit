@@ -793,6 +793,9 @@
         <button class="btn btn-sm" id="downloadZipBtn" onclick="downloadZip()" style="display:none">
           ⬇ Download all (.zip)
         </button>
+        <button class="btn btn-sm" id="combineBtn" onclick="combineAll()" style="display:none">
+          ⬗ Combine into one .md
+        </button>
       </div>
     </div>
 
@@ -1009,7 +1012,8 @@ async function convertAll() {
   if (doneCount > 0) {
     document.getElementById('resultsSection').style.display = 'block';
     const zipBtn = document.getElementById('downloadZipBtn');
-    if (doneCount > 1) { zipBtn.style.display = 'inline-flex'; } else { zipBtn.style.display = 'none'; }
+    const combineBtn = document.getElementById('combineBtn');
+    if (doneCount > 1) { zipBtn.style.display = 'inline-flex'; combineBtn.style.display = 'inline-flex'; } else { zipBtn.style.display = 'none'; combineBtn.style.display = 'none'; }
     showToast(`${doneCount} file${doneCount > 1 ? 's' : ''} converted`, 'success');
   }
 }
@@ -1197,6 +1201,26 @@ function downloadFile(id, ext) {
   a.download = filename + '.' + ext;
   a.click();
   URL.revokeObjectURL(a.href);
+}
+
+
+async function combineAll() {
+  const items = fileQueue.filter(f => f.status === 'done');
+  if (!items.length) return;
+
+  const combined = items.map(item => {
+    const name = item.file.name.replace(/\.[^.]+$/, '');
+    const md = results[item.id] || '';
+    return `# ${name}\n\n${md}`;
+  }).join('\n\n---\n\n');
+
+  const blob = new Blob([combined], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'pdflit-combined.md';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('Combined file downloaded', 'success');
 }
 
 async function downloadZip() {
